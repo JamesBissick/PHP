@@ -1,0 +1,7 @@
+DSN//Data Source Name
+Instance classe PDO
+host-->localhost
+port-->3306 (mysql)
+dbname-->"NFactoryBlog"
+Unix_socket
+Charset-->UTF-8
