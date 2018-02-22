@@ -1,0 +1,15 @@
+## Modifier httpd.conf
+
+Changer root directory (ctrl+f = root)
+
+
+## Each Class in a separate file
+Not required, but has advantages
+    - Easier to find a specific Class in your code --> easier to maintain
+    - Can load the Class files automatically
+
+
+## Require or include?
+To use the class, we need to load the file it's in:
+    include, if file not find will carry on
+    require, if file not find, will stop the code and produce an error
