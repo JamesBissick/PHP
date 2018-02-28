@@ -160,7 +160,6 @@
 
     
     ## Regular expression replacing in PHP
-
     // Searches $string for matches to $reg_exp and replaces them with $replacement
     $result = preg_replace($reg_exp, $replacement, $string)
                             /abc/  |    def   |     abc    |   => def
@@ -172,6 +171,35 @@
 
                            /ab(c)/ |  \1de    |     abc     |   => cde             \1 | replace letter by 1st letter in parenthesis and the rest by de
                  /(\w+) and (\w+)/ | \1 or \2 |Jack and Jill|   => Jack or Jill    \w | any word character from a to z, A to Z and 0 to 9, words
+
+    
+
+    ### Routes with variables
+    // Adding routes with variables
+        
+    $routes->add('posts/index', [               
+        'controller' => 'Posts',        ==>     $router->add('{controller}/{action}');
+        'action' => 'index'
+    ]);
+
+    ## Processing the route containing variables
+    -- To match the route to the request URL, it needs to be converted into a regular expression
+
+    $router->add('{controller}/{action}'); ==> /^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)/
+    
+    ## Turning the route into regular expression
+
+                                {controller}/{action}
+                                          |
+                                          v
+                        <-- First, escape forward slashes -->
+                        preg_replace('/\//', '\\/', $route);
+                            Result: {controller}\/{action}
+                                          |
+                                          v
+                        <-- Convert strings inside curly brackets
+                preg_replace('/\{([a-z-]+)\}/', '(?P<\1>[a-z-]+)', $route);
+                Result: /^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+$)/
 
 
     */
